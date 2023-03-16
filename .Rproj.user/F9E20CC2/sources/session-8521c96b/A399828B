@@ -1,27 +1,27 @@
 {
-    "id": "70512DDC",
-    "path": "~/Desktop/R_learn/fiv_cw/question1.R",
-    "project_path": "question1.R",
+    "id": "A399828B",
+    "path": "~/Desktop/R_learn/fiv_cw/question4.R",
+    "project_path": "question4.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "172215118",
     "contents": "",
     "dirty": false,
-    "created": 1678930349507.0,
+    "created": 1678954159047.0,
     "source_on_save": false,
-    "relative_order": 4,
+    "relative_order": 7,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
         "cursorPosition": "22,0",
-        "scrollLine": "6"
+        "scrollLine": "11"
     },
     "folds": "",
-    "lastKnownWriteTime": 1678953636,
+    "lastKnownWriteTime": 1678956280,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1678953636144,
+    "last_content_update": 1678956280764,
     "read_only": false,
     "read_only_alternatives": []
 }
