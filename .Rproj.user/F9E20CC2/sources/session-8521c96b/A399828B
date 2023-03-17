@@ -3,7 +3,7 @@
     "path": "~/Desktop/R_learn/fiv_cw/question4.R",
     "project_path": "question4.R",
     "type": "r_source",
-    "hash": "172215118",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1678954159047.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "22,0",
-        "scrollLine": "11"
+        "cursorPosition": "26,2",
+        "scrollLine": "10"
     },
     "folds": "",
-    "lastKnownWriteTime": 1678956280,
+    "lastKnownWriteTime": 1678956520,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1678956280764,
+    "last_content_update": 1678956520091,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -4,9 +4,7 @@ library(plotly)
 
 tag_by_year <- read.csv('/Users/seowyongtao/Desktop/R_learn/fiv_cw/QueryResults.csv')
 
-mobile_programming_framework = c('react-native', 'flutter', 'xamarin', 'swift', 
-                                 'ionic', 'jquery-mobile', 'nativescript', 'onsen-ui', 'extjs',
-                                 'apache-cordova')
+mobile_programming_framework = c('react-native', 'flutter', 'xamarin', 'swift', 'jquery-mobile', 'nativescript', 'extjs')
 
 mobile_by_year <- tag_by_year %>%
                     filter(TagName %in% mobile_programming_framework, Year == 2022) %>%
