@@ -24,7 +24,7 @@ fig <- ggplot(tag_by_year_2022_top20, aes(x=reorder(TagName, Number), y=Number, 
         geom_col() + 
         theme(axis.text.x = element_text(angle = 90)) +  
         scale_fill_identity() + 
-        labs(y= "Number of Questions", x = "Tag Name") + 
+        labs(y= "Number of Questions", x = "") + 
         ggtitle("Top 20 Most Asked-About Tags (2022)") + 
         coord_flip()
 

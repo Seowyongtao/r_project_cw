@@ -24,7 +24,8 @@ mobile_percentage <- mobile_by_year_total %>%
 
 fig <- ggplot(mobile_percentage, aes(x=Year, y=Percentage, color=TagName)) + 
   geom_line() +
-  ggtitle("Growing Trend of Mobile Programming Frameworks") 
+  ggtitle("Growing Trend of Mobile Programming Frameworks") +
+  labs(y="Percentage (No. Questions/Total Questions)")
 
 ggplotly(fig)
 

@@ -20,6 +20,7 @@ r_percentage <- r_by_year_total %>%
 fig <- ggplot(r_percentage , aes(x=Year, y=Percentage)) + 
   geom_line(color='red') +
   geom_point(color= 'red') +
-  ggtitle("Growing Trend of R") 
+  ggtitle("Growing Trend of R") +
+  labs(y= "Percentage (No. Questions/Total Questions)")
   
 ggplotly(fig)

@@ -23,7 +23,7 @@ fig <- ggplot(mobile_by_year , aes(x=reorder(TagName, Number), y=Number, fill=co
   geom_col() + 
   theme(axis.text.x = element_text(angle = 90)) +  
   scale_fill_identity() + 
-  labs(y= "Number of Questions", x = "Tag Name") + 
+  labs(y= "Number of Questions", x = "") + 
   ggtitle("Popular Mobile Programming Frameworks") + 
   coord_flip()
 

@@ -21,6 +21,7 @@ tag_percentage <- tag_by_year_total %>%
 
 
 fig <- ggplot(tag_percentage, aes(x=Year, y=Percentage, color=TagName)) + geom_line() +
-        ggtitle("Growing Trend of PowerBi and Tableau") 
+        ggtitle("Growing Trend of PowerBi and Tableau") +
+        labs(y='Percentage (No. Questions/Total Questions)')
 
 ggplotly(fig)
