@@ -2,25 +2,36 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-tag_by_year <- read.csv("C:/Users/Acer Spin 5/Desktop/R_projects/r_project_cw/QueryResults.csv")
+current_path <- getwd()
 
-year_total <- tag_by_year %>% 
-                  group_by(Year) %>%
-                  summarize(Year_total = sum(Number))
+file_path <- paste(current_path,"/stackOverFlow_dataset.csv", sep = "")
 
-r_by_year <- tag_by_year %>%
-                filter(TagName == 'r')
+tag_by_year <- read.csv(file_path)
 
-r_by_year_total <- r_by_year %>%
-                      left_join(year_total, by = "Year")
+mobile_programming_framework = c('react-native', 'flutter', 'xamarin', 'swift', 'jquery-mobile', 'nativescript', 'extjs')
 
-r_percentage <- r_by_year_total %>%
-                    mutate(Percentage = Number/Year_total*100)
+mobile_by_year <- tag_by_year %>%
+                    filter(TagName %in% mobile_programming_framework, Year == 2022) %>%
+                    arrange(desc(Number))
 
-fig <- ggplot(r_percentage , aes(x=Year, y=Percentage)) + 
-  geom_line(color='red') +
-  geom_point(color= 'red') +
-  ggtitle("Growing Trend of R") +
-  labs(y= "Percentage (No. Questions/Total Questions)")
-  
+
+top <- head(mobile_by_year,1)
+
+mobile_by_year <- mobile_by_year %>%
+  mutate(cond = case_when(
+    TagName %in% top[,"TagName"] ~ 'red',
+    TRUE ~ 'grey'   
+  ))
+
+fig <- ggplot(mobile_by_year , aes(x=reorder(TagName, Number), y=Number, fill=cond)) + 
+  geom_col() + 
+  theme(axis.text.x = element_text(angle = 90)) +  
+  scale_fill_identity() + 
+  labs(y= "Number of Questions", x = "") + 
+  ggtitle("Popular Mobile Programming Frameworks") + 
+  coord_flip()
+
 ggplotly(fig)
+
+
+

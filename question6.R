@@ -2,37 +2,30 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-tag_by_year <- read.csv("C:/Users/Acer Spin 5/Desktop/R_projects/r_project_cw/QueryResults.csv")
-                      
-Tags <- c('powerbi', 'tableau-api')
+current_path <- getwd()
 
-bi_tool_2020 <- tag_by_year %>%
-  filter(TagName %in% Tags, Year == 2020) %>%
-  arrange(TagName)
+file_path <- paste(current_path,"/stackOverFlow_dataset.csv", sep = "")
 
-bi_tool_2020_list <- bi_tool_2020[,"Number"]
+tag_by_year <- read.csv(file_path)
 
-bi_tool_2021 <- tag_by_year %>%
-  filter(TagName %in% Tags, Year == 2021) %>%
-  arrange(TagName)
+BiTools <- c('powerbi', 'tableau-api')
 
-bi_tool_2021_list <- bi_tool_2021[,"Number"]
+year_total <- tag_by_year %>% 
+  group_by(Year) %>%
+  summarize(Year_total = sum(Number))
 
-bi_tool_2022 <- tag_by_year %>%
-  filter(TagName %in% Tags, Year == 2022) %>%
-  arrange(TagName)
+tag_by_year <- tag_by_year %>%
+                  filter(TagName %in% BiTools)
 
-bi_tool_2022_list <- bi_tool_2022[,"Number"]
+tag_by_year_total <- tag_by_year %>%
+                      left_join(year_total, by = "Year")
 
-data <- data.frame(Tags, bi_tool_2020_list, bi_tool_2021_list, bi_tool_2022_list)
-
-fig <- plot_ly(data, x = ~Tags, y = ~bi_tool_2020_list, type = 'bar', name = '2020')
-fig <- fig %>% add_trace(y = ~bi_tool_2021_list, name = '2021')
-fig <- fig %>% add_trace(y = ~bi_tool_2022_list, name = '2022')
-fig <- fig %>% layout(title = "Comparison between Power Bi and Tableau in the Past 3 Years", yaxis = list(title = 'Number of Questions'), barmode = 'stack')
-
-fig
+tag_percentage <- tag_by_year_total %>%
+                      mutate(Percentage = Number/Year_total*100)
 
 
+fig <- ggplot(tag_percentage, aes(x=Year, y=Percentage, color=TagName)) + geom_line() +
+        ggtitle("Growing Trend of PowerBi and Tableau") +
+        labs(y='Percentage (No. Questions/Total Questions)')
 
-
+ggplotly(fig)

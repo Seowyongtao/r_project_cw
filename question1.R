@@ -2,7 +2,11 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-tag_by_year <- read.csv("C:/Users/Acer Spin 5/Desktop/R_projects/r_project_cw/QueryResults.csv")
+current_path <- getwd()
+
+file_path <- paste(current_path,"/stackOverFlow_dataset.csv", sep = "")
+
+tag_by_year <- read.csv(file_path)
 
 tag_by_year_2022 <- tag_by_year %>%
                       filter(Year == 2022) %>%

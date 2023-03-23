@@ -1,33 +1,35 @@
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(crosstalk)
 
-tag_by_year <- read.csv("C:/Users/Acer Spin 5/Desktop/R_projects/r_project_cw/QueryResults.csv")
+current_path <- getwd()
+
+file_path <- paste(current_path,"/stackOverFlow_dataset.csv", sep = "")
+
+tag_by_year <- read.csv(file_path)
 
 mobile_programming_framework = c('react-native', 'flutter', 'xamarin', 'swift', 'jquery-mobile', 'nativescript', 'extjs')
 
+year_total <- tag_by_year %>% 
+                  group_by(Year) %>%
+                  summarize(Year_total = sum(Number))
+
 mobile_by_year <- tag_by_year %>%
-                    filter(TagName %in% mobile_programming_framework, Year == 2022) %>%
-                    arrange(desc(Number))
+                      filter(TagName %in% mobile_programming_framework) %>%
+                      arrange(desc(Number))
+
+mobile_by_year_total <- mobile_by_year %>%
+                      left_join(year_total, by = "Year")
 
 
-top <- head(mobile_by_year,1)
+mobile_percentage <- mobile_by_year_total %>%
+  mutate(Percentage = Number/Year_total*100)
 
-mobile_by_year <- mobile_by_year %>%
-  mutate(cond = case_when(
-    TagName %in% top[,"TagName"] ~ 'red',
-    TRUE ~ 'grey'   
-  ))
-
-fig <- ggplot(mobile_by_year , aes(x=reorder(TagName, Number), y=Number, fill=cond)) + 
-  geom_col() + 
-  theme(axis.text.x = element_text(angle = 90)) +  
-  scale_fill_identity() + 
-  labs(y= "Number of Questions", x = "") + 
-  ggtitle("Popular Mobile Programming Frameworks") + 
-  coord_flip()
+fig <- ggplot(mobile_percentage, aes(x=Year, y=Percentage, color=TagName)) + 
+  geom_line() +
+  ggtitle("Growing Trend of Mobile Programming Frameworks") +
+  labs(y="Percentage (No. Questions/Total Questions)")
 
 ggplotly(fig)
-
-
 
